@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title th:text="'Post #' + ${post.post_id}">포스트 상세</title>
+  </head>
+  <body>
+    <h1 th:text="${post.postName}">포스트 제목</h1>
+    <p>
+      작성자: <span th:text="${post.postWriter}">작성자</span><br />
+      좋아요: <span th:text="${post.likes}">0</span>
+    </p>
+    <hr />
+    <div th:utext="${post.postContent}">포스트 내용</div>
+    <hr />
+    <a th:href="@{/}">목록으로 돌아가기</a>
+  </body>
+</html>

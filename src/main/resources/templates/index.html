@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    home.html 향 후 login 페이지로 변경할 수 있음<br />
+    session 값 확인 :
+    <p th:text="${session.loginEmail}"></p>
+    <a href="/login">로그인</a>
+    <form action="/logout" method="post">
+      <button type="submit">로그아웃</button>
+    </form>
+    <h2>게시글 목록</h2>
+    <ul>
+      <li th:each="post : ${posts}">
+        <a
+          th:href="@{/post/{id}(id=${post.post_id})}"
+          th:text="${post.postName}"
+        >
+          게시글 제목
+        </a>
+      </li>
+    </ul>
+    <div>
+      <a href="/write">글작성</a>
+    </div>
+  </body>
+</html>

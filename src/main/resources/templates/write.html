@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="/write" method="post">
+      <div>
+        <label for="title">제목</label><br />
+        <input
+          type="text"
+          id="postName"
+          name="postName"
+          placeholder="제목을 입력하세요"
+          required
+        />
+      </div>
+      <div style="margin-top: 1em">
+        <label for="content">내용</label><br />
+        <textarea
+          id="postName"
+          name="postContent"
+          rows="8"
+          cols="50"
+          placeholder="내용을 입력하세요"
+          required
+        ></textarea>
+      </div>
+      <div style="margin-top: 1em">
+        <button type="submit">작성</button>
+      </div>
+    </form>
+  </body>
+</html>
