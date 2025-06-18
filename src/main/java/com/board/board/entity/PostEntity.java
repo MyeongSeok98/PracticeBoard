@@ -35,14 +35,14 @@ public class PostEntity{
             orphanRemoval = true,
             fetch = FetchType.LAZY
     )
-    private List<CommentEntity> comments = new ArrayList<>();
+    private List<CommentEntity> comments;
 
     public static PostEntity toPostEntity(PostDTO postDTO){
         PostEntity postEntity = new PostEntity();
         postEntity.setPostName(postDTO.getPostName());
-        postEntity.setPostContent(postEntity.getPostContent());
-        postEntity.setPostWriter(postEntity.getPostWriter());
-        postEntity.setLikes(postEntity.getLikes());
+        postEntity.setPostContent(postDTO.getPostContent());
+        postEntity.setPostWriter(postDTO.getPostWriter());
+        postEntity.setLikes(postDTO.getLikes());
 
         return postEntity;
     }

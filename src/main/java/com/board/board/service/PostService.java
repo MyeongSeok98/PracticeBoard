@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 public class PostService {
     private final PostRepository postRepository;
 
+    @Transactional
     public Long save(PostDTO postDTO){
         PostEntity postEntity = new PostEntity();
         postEntity.setPostName(postDTO.getPostName());
@@ -33,6 +34,9 @@ public class PostService {
                     PostDTO postDTO = new PostDTO();
                     postDTO.setPost_id(postEntity.getPost_id());
                     postDTO.setPostName(postEntity.getPostName());
+                    postDTO.setPostWriter(postEntity.getPostWriter());
+                    postDTO.setPostContent(postEntity.getPostContent());
+                    postDTO.setLikes(postEntity.getLikes());
                     return postDTO;
                 }).collect(Collectors.toList());
     }

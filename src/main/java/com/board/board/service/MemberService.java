@@ -5,12 +5,14 @@ import com.board.board.entity.MemberEntity;
 import com.board.board.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Optional;
 
 // Repository의 save는 jpa에서 지정해주는 것이기 때문에 반드시 save로 이름을 지정해야한다.
 @Service
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class MemberService {
     private final MemberRepository memberRepository;
     public void save(MemberDTO memberDTO){

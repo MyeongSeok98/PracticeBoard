@@ -4,44 +4,47 @@ import com.board.board.dto.PostDTO;
 import com.board.board.service.PostService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
-@Controller
+@CrossOrigin(origins = "http://localhost:3000",
+        allowCredentials = "true")
+@RestController
+@RequestMapping("/api/posts")
 @RequiredArgsConstructor
 public class PostController {
 
     private final PostService postService;
 
-    @GetMapping("/post/{post_id}")
-    public String viewPost(@PathVariable("post_id") Long post_id, Model model){
+    @GetMapping("/{post_id}")
+    public ResponseEntity<?> viewPost(@PathVariable("post_id") Long post_id){
         PostDTO post = postService.findById(post_id);
 
-        model.addAttribute("post", post);
-        return "post";
-    }
-
-    @GetMapping("/write")
-    public String writeForm(){
-        return "write";
+        return ResponseEntity.ok(post);
     }
 
     @PostMapping("/write")
-    public String write(
-            @ModelAttribute PostDTO postDTO,
+    public ResponseEntity<?> write(
+            @RequestBody PostDTO postDTO,
             HttpSession httpSession){
         String writerName = (String) httpSession.getAttribute("loginName");
         postDTO.setPostWriter(writerName);
 
         postDTO.setLikes(0);
+        System.out.println("postDTO = "+ postDTO);
         postService.save(postDTO);
+        return new ResponseEntity<>(postDTO, HttpStatus.CREATED);
+    }
 
-        return "redirect:/";
+    @GetMapping
+    public ResponseEntity<List<PostDTO>> list(){
+        List<PostDTO> all = postService.findAll();
+        return ResponseEntity.ok(all);
     }
 }

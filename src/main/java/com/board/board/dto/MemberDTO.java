@@ -1,8 +1,11 @@
 package com.board.board.dto;
 
+import com.board.board.entity.CommentEntity;
 import com.board.board.entity.MemberEntity;
 import lombok.*;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
+
+import java.util.List;
 
 @Getter
 @Setter
